@@ -23,14 +23,9 @@ Array.prototype.customFind = function (predicate) {
      return undefined;
 }
 
-Array.prototype.customSome = function (predicate) {
+Array.prototype.customSome = function (limite) {
     // Implemente aqui seu algoritmo
-    for (var i = 0; i < this.length; i++) {
-        if (predicate(this[i])) {
-          return true;
-        }
-    }
-    return false;
+    return this.customReduce((total, quantity) => total + quantity) >= limite ? "sim" : "nao"
 }
 
 Array.prototype.customFilter = function (predicate) {
@@ -115,8 +110,8 @@ console.log(`Resultado custom - Medalhas de Ouro no continente Asiático: ${resu
     console.log(`4 - países que conquistaram no minimo 30 medalhas: ${paisesCom30MedalhasNoMinimo}`); 
 
 // 5 - Crie um algoritmo para verificar se o continente América do Sul conquistou pelo menos 20 medalhas de ouro
-    const paisesComPeloMenos20MedalhasDeOUro =  olympicsMedalTable.customFilter(i => i.continent === 'AMÉRICA DO SUL')
+    const paisesComPeloMenos20MedalhasDeOUro =  olympicsMedalTable.customFilter(i => i.continent === 'AMERICA DO SUL')
     .customMap(i => i.gold)
-    .customSome((total, quantity) => total + quantity > 3)
-    console.log(`5 - O continente da América do Sul ${paisesComPeloMenos20MedalhasDeOUro ? 'sim':'não'} conquistou mais que 20 medalhas de ouro ou mais`); 
+    .customSome(20)
+    console.log(`5 - O continente da América do Sul ${paisesComPeloMenos20MedalhasDeOUro} conquistou mais que 20 medalhas de ouro ou mais`); 
 
